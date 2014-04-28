@@ -1,11 +1,8 @@
-/*jslint vars:true, nomen:true, forin:true, regexp:true, browser:true, devel:true */
-/*globals _, $, GS, Notification */
-
 (function () {
     "use strict";
 
-    var chromeUnblock = 'Settings/advanced settings/Privacy/Content Settings/Notifications/Manage Exceptions/';
-    var firefoxUnblock = 'Tools/Page Info/Permissions/Show Notifications';
+    // var chromeUnblock = 'Settings/advanced settings/Privacy/Content Settings/Notifications/Manage Exceptions/',
+    //     firefoxUnblock = 'Tools/Page Info/Permissions/Show Notifications';
 
     console.log('Loading Notifications Module');
 
@@ -132,17 +129,16 @@
                 // Firefox needs "close."  Chrome needs "cancel."  This should blast both to hell.
                 try {
                     temp[i].close();
-                } catch (e) { }
+                } catch (ignore) { }
                 try {
                     temp[i].cancel();
-                } catch (e2) { }
+                } catch (ignore) { }
             }
         });
 
-        var n;
         GS.notifyUser = function (message, sound) {
             if (GS.get_option('audio_notifications')) {
-                if (typeof sound !== 'undefined') {
+                if (sound !== undefined) {
                     sound.play();
                 }
             }

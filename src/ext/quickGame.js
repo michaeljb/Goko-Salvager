@@ -1,6 +1,3 @@
-/*jslint browser: true, devel: true, indent: 4, maxlen: 90, es5: true, vars:true, nomen:true */
-/*global $, _, FS, GS, mtgRoom */
-
 (function () {
     "use strict";
 
@@ -8,7 +5,7 @@
     mod.dependencies = ['FS.EventDispatcher'];
     mod.load = function () {
         var loadQuickGameModule = function () {
-            var initQuickGame, createQuickGameTable;
+            var initQuickGame; //, createQuickGameTable;
 
             // Configuration
             GS.QG = GS.QG || {};
@@ -136,11 +133,11 @@
                     var mtgRoom = window.mtgRoom;
                     var conn = mtgRoom.conn;
                     var zch = mtgRoom.helpers.ZoneClassicHelper;
-                    if (typeof conn !== 'undefined' && typeof zch !== 'undefined') {
+                    if (conn !== undefined && zch !== undefined) {
                         loadQuickGameModule();
                         alreadyLoaded = true;
                     }
-                } catch (e) {}
+                } catch (ignore) {}
             }
         });
     };

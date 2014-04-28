@@ -1,6 +1,3 @@
-/*jslint browser: true, devel: true, indent: 4, vars: true, nomen: true, regexp: true, forin: true, white:true */
-/*global $, _, GS, Dom */
-
 (function () {
     "use strict";
 
@@ -39,7 +36,6 @@
 
             // Apply speed factor uniformly to all animation speeds
             if (GS.get_option('speed_tweak_uniform')) {
-                var mode, prop;
                 _.each(factors, function (fac, mode) {
                     Dom.GlobalLayout.animationTimings[mode]= {
                         name: mode,

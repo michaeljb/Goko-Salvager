@@ -37,6 +37,9 @@
     # AI's Safari Developer Certificate ID:
     :safari_dev_cert_id => '366P22F9M8',
 
+    # the normal title property breaks for the Safari build for unknown reasons
+    :safari_title => 'Goko Dominion Salvager',
+
     # CSS to be injected
     :css => [
         'logviewer.css',

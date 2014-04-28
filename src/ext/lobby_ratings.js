@@ -1,6 +1,3 @@
-/*jslint browser: true, devel: true, indent: 4, vars: true, nomen: true, regexp: true, forin: true, white:true */
-/*global $, _, GS, FS, mtgRoom, DEFAULT_RATING */
-
 /*
  * Lobby ratings module
  *
@@ -34,7 +31,7 @@
         }
 
         // Cache all Isotropish ratings
-        var noIsoCacheWarned = false;
+        GS.noIsoCacheWarned = false;
         var queuedRequests = [];
         GS.WS.waitSendMessage('QUERY_ISO_TABLE', {}, function (resp) {
 
@@ -61,7 +58,7 @@
             // and playerName.  This will also allow the server to record the
             // id-name connection.
             //
-            if (typeof GS.isoLevelCache[playerId] !== 'undefined') {
+            if (GS.isoLevelCache[playerId] !== undefined) {
                 // Player in cache
                 updateIsoRating2(playerId, playerElement);
             } else {
@@ -69,7 +66,7 @@
                 var player = mtgRoom.playerList.findById(playerId)[0];
 
                 // Undefined if player has already left lobby --> ignore him
-                if (typeof player !== 'undefined') {
+                if (player !== undefined) {
                     var playerName = player.get('playerName');
                     var msg = {
                         playerId: playerId,
@@ -126,7 +123,9 @@
 
                     // insert iso level right after Goko Pro rating
                     opts.$el.closest('div').find('.vp-rating-pro').closest('p')
-                        .after(GS.template('popup-iso-level', { level: GS.isoLevelCache[opts.playerId] }));
+                        .after(GS.template('popup-iso-level', {
+                            level: GS.isoLevelCache[opts.playerId]
+                        }));
                 };
             }
 
@@ -153,11 +152,12 @@
             var newEl = getSortablePlayerObjectFromElement(element),
                 elements = list.children,
                 b = elements.length,
-                a = 0;
+                a = 0,
+                c, compare;
 
             while (a !== b) {
-                var c = Math.floor((a + b) / 2);
-                var compare = getSortablePlayerObjectFromElement(elements[c]);
+                c = Math.floor((a + b) / 2);
+                compare = getSortablePlayerObjectFromElement(elements[c]);
 
                 // sort first by rating, then alphabetically
                 if (compare > newEl) {
@@ -195,11 +195,11 @@
                 try {
                     var playerId = playerElement.querySelector('.player-list-item')
                                                 .getAttribute('data-playerid');
-                    var playerName = mtgRoom.playerList
-                                            .findById(playerId)[0]
-                                            .get('playerName');
+                    // var playerName = mtgRoom.playerList
+                    //                         .findById(playerId)[0]
+                    //                         .get('playerName');
 
-                    if (typeof GS.isoLevelCache === 'undefined') {
+                    if (GS.isoLevelCache === undefined) {
                         // Warn that the cache is not available
                         if (!GS.noIsoCacheWarned) {
                             console.log('ISO level cache not yet '
@@ -217,7 +217,7 @@
                         // Update player's lobby list element.
                         updateIsoRating(playerId, playerElement);
                     }
-                } catch (e) {
+                } catch (ignore) {
                     // Players sometimes disappear from the list before
                     // this code is reached.  Ignore these errors.
                 }
@@ -227,7 +227,7 @@
             var blist = GS.getCombinedBlacklist(true);
             var pname = playerElement
                 .querySelector('.fs-mtrm-player-name>strong').innerHTML;
-            if (typeof blist[pname.toLowerCase()] !== 'undefined'
+            if (blist[pname.toLowerCase()] !== undefined
                     && blist[pname.toLowerCase()].censor) {
                 $(playerElement).hide();
             } else {

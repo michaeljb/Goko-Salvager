@@ -1,7 +1,3 @@
-/*jslint browser: true, devel: true, indent: 4, vars: true, nomen: true, regexp: true, forin: true, white:true */
-/*globals $, _, GS, FS */
-
-
 //esoteric functions and card definitions
 var kinggen_utils = {};
 kinggen_utils = (function () {

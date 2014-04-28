@@ -1,6 +1,3 @@
-/*jslint browser: true, devel: true, indent: 4, es5: true, vars: true, nomen: true, regexp: true, forin: true */
-/*globals $, GS, mtgRoom */
-
 (function () {
     "use strict";
 
@@ -28,7 +25,7 @@
         object.prototype[methodname] = function () {
 
             // Run fnBefore
-            if (typeof fnBefore !== 'undefined' && fnBefore !== null) {
+            if (fnBefore !== undefined && fnBefore !== null) {
                 fnBefore.apply(this, arguments);
             }
 
@@ -36,7 +33,7 @@
             var out = this[methodname_o].apply(this, arguments);
 
             // Run fnAfter
-            if (typeof fnAfter !== 'undefined' && fnAfter !== null) {
+            if (fnAfter !== undefined && fnAfter !== null) {
                 fnAfter.apply(this, arguments);
             }
 
@@ -58,7 +55,7 @@
     };
 
     GS.getGameClient = function () {
-        if (typeof mtgRoom !== 'undefined') {
+        if (mtgRoom !== undefined) {
             var roomId;
             if (mtgRoom.getCurrentTable() !== null) {
                 roomId = mtgRoom.getCurrentTable().get('room').get('roomId');
@@ -66,22 +63,21 @@
                 roomId = mtgRoom.currentRoomId;
             }
 
-            if (typeof roomId === 'undefined' || roomId === null) {
+            if (roomId === undefined || roomId === null) {
                 throw 'Could not determine room id';
-            } else {
-                var table = mtgRoom.getCurrentTable();
-                var tableNo = table !== null ? table.get('number') : 0;
-                var key = roomId + ':' + tableNo;
-                return mtgRoom.games[key];
             }
+            var table = mtgRoom.getCurrentTable();
+            var tableNo = table !== null ? table.get('number') : 0;
+            var key = roomId + ':' + tableNo;
+            return mtgRoom.games[key];
         }
         throw 'Meeting Room undefined';
     };
 
     GS.sendRoomChat = function (message, nocheck) {
-        if (typeof GS.vp.toggle !== 'undefined'
+        if (GS.vp.toggle !== undefined
                 && GS.vp.toggle.isChatCommand(message)
-                && (typeof nocheck === 'undefined' || !nocheck)) {
+                && (nocheck === undefined || !nocheck)) {
             GS.vp.toggle.handleChatCommand(message);
         } else {
             var gc = GS.getGameClient();
@@ -151,10 +147,11 @@
     // load templates from the generated templates.js
     GS.template = function (templateName, options) {
       try {
-          return window['JST'][templateName](options);
+          return window.JST[templateName](options);
       } catch (e) {
           GS.debug('Template not found: ' + templateName);
           return '';
       }
-    }
+    };
+
 }());

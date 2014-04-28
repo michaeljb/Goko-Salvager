@@ -1,6 +1,3 @@
-/*jslint browser:true, devel:true, white:true, vars:true, forin:true */
-/*globals $, angular, GS, mtgRoom */
-
 (function () {
     "use strict";
 
@@ -19,7 +16,7 @@
         'notifications',
         'lobbyRatings',
         'decktracker',
-        'tableState', 
+        'tableState',
         'autokick',
         'kingdomGenerator',
         'speedTweak',
@@ -29,7 +26,7 @@
         'automatchSeekPop',
         'automatch',
         'quickGame',
-        'sidebar',              
+        'sidebar',
         'logviewer',            // Depends on sidebar
         'vpcalculator',         // Depends on sidebar
         'vptoggle',             // Depends on sidebar
@@ -53,7 +50,7 @@
             }
         } else {
             var intvl = setInterval(function () {
-                var missing = mod.getMissingDeps();
+                missing = mod.getMissingDeps();
                 if (missing.length === 0) {
                     clearInterval(intvl);
                     console.log('Loading module ' + mod.name);

@@ -1,10 +1,7 @@
-/*jslint browser: true, devel: true, indent: 4, maxlen: 90, es5: true */
-/*global $, angular, GS */
-
 (function () {
     "use strict";
 
-    var mod = GS.modules.automatchSeekPop = new GS.Module('Automatch Seek Popup');
+    var mod = GS.modules.automatchSeekPop=  new GS.Module('Automatch Seek Popup');
     mod.dependencies = ['$'];
     mod.load = function () {
         GS.AM = GS.AM || {};
@@ -278,7 +275,7 @@
             $('#seekhide').prop('disabled', false);
             $('#seekstatus').html(seeking ? 'Looking for a match...' : '');
 
-            if (typeof visible === "undefined") {
+            if (visible === undefined) {
                 visible = true;
             }
 

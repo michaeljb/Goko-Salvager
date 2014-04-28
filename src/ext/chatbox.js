@@ -1,12 +1,7 @@
-/*jslint vars:true, nomen:true, forin:true, regexp:true, browser:true, devel:true */
-
-/*globals _, $, GS, mtgRoom, Dom, Audio */
-
 // TODO: Immediately send Turn 2 messages when opponents have all joined the game.
 
 (function () {
     "use strict";
-
 
     GS.modules.chatbox = new GS.Module('Chat Box');
     GS.modules.chatbox.dependencies = [
@@ -20,7 +15,8 @@
         var pname2pclass;
         var gameClient;
 
-        var chatHistory = [];
+        // commented to appease jslint
+        // var chatHistory = [];
 
         // Add the chat box widget to the sidebar. The sidebar module is
         // responsible for whether to display it or not.
@@ -61,12 +57,16 @@
         // Fake version has methods for game window destructor to call.
         var createRealGokoChatManager = Dom.DominionWindow.prototype._createChatManager;
         var createFakeGokoChatManager = function () {
-		    var dominionWindow = this;
 		    var chatManager = {
-                destroy: function () {},
-                addChat: function () {
+                destroy: function () {
+                  GS.debug('chatManager.destroy()');
                 },
-                setVisible: function () {}
+                addChat: function () {
+                  GS.debug('chatManager.addChat()');
+                },
+                setVisible: function () {
+                  GS.debug('chatManager.setVisible()');
+                }
             };
 		    this.chatManager = chatManager;
 	    };
@@ -132,7 +132,7 @@
                 $('#chatline').empty();
 
                 // Stop listening to the old game client
-                if (typeof gameClient !== 'undefined' && gameClient !== null) {
+                if (gameClient !== undefined && gameClient !== null) {
                     gameClient.unbind('incomingMessage:gameSetup', onGameSetup);
                     mtgRoom.unbind('MeetingRoom:Game:ClientExit', onOppExit);
                 }

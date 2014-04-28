@@ -1,12 +1,9 @@
-/*jslint browser:true, devel:true, nomen:true, forin:true, vars:true, regexp:true, white:true */
-/*globals $, _, angular, FS, DominionClient, GS */
-
 (function () {
     "use strict";
 
     GS.modules.eventLogger = new GS.Module('Event Logger');
     GS.modules.eventLogger.dependencies = [
-        'DominionClient', 
+        'DominionClient',
         'FS.Connection',
         'FS.GameInstance'
     ];
@@ -17,7 +14,8 @@
             Connection: [],
             GameInstance: []
         };
-        var eh = window.eventHistory;
+
+        // var eh = window.eventHistory;
 
         GS.alsoDo(FS.MeetingRoom, 'trigger', function (msg) {
             //eh.MeetingRoom.push(arguments);
@@ -31,7 +29,7 @@
             console.log('Connection: ' + msg);
             console.log(Array.prototype.slice.call(arguments,1));
         });
-        
+
         //GS.alsoDo(FS.GameInstance, 'trigger', function (msg) {
         //    eh.MeetingRoom.push(arguments);
         //    console.log('GameInstance: ' + msg);

@@ -33,7 +33,6 @@ module.exports = function (grunt) {
                     todo: true,
                     unparam: true,
                     vars: true,
-                    white: true,
                     globals: [
                         '$',
                         '_',

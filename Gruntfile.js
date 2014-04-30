@@ -1,16 +1,19 @@
 module.exports = function (grunt) {
     'use strict';
 
+    var jslintFiles = [
+        'Gruntfile.js',
+        'src/ext/*.js',
+        'src/ext/init.js.erb',
+        'src/config/**/*.js.erb'
+    ];
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         jslint: {
             all: {
-                src: [
-                    'Gruntfile.js',
-                    'src/ext/*.js',
-                    'src/ext/init.js.erb'
-                ],
+                src: jslintFiles,
                 exclude: [
                     'src/ext/templates.js',
                     'src/ext/kingdom_generator.js'
@@ -78,7 +81,7 @@ module.exports = function (grunt) {
 
         watch: {
             jslint: {
-                files: ['Gruntfile.js', 'src/ext/*.js', 'src/ext/init.js.erb'],
+                files: jslintFiles,
                 tasks: ['jslint']
             }
         }

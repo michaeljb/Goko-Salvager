@@ -68,6 +68,10 @@ module.exports = function (grunt) {
             }
         },
 
+        qunit: {
+            all: ['test/**/*.html']
+        },
+
         wrap: {
             templates: {
                 src: 'src/ext/templates.js',
@@ -88,9 +92,11 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-jst');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-wrap');
 
     grunt.registerTask('templates', ['jst:compile', 'wrap:templates']);
+    grunt.registerTask('test', ['qunit:all']);
 };

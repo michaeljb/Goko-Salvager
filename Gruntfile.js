@@ -72,6 +72,18 @@ module.exports = function (grunt) {
             all: ['test/**/*.html']
         },
 
+        shell: {
+            chrome_assemble: {
+                command: 'rake chrome:assemble'
+            },
+            firefox_build: {
+                command: 'rake firefox:build'
+            },
+            safari_build: {
+                command: 'rake safari:build'
+            }
+        },
+
         wrap: {
             templates: {
                 src: 'src/ext/templates.js',
@@ -86,6 +98,47 @@ module.exports = function (grunt) {
             jslint: {
                 files: jslintFiles,
                 tasks: ['jslint']
+            },
+            chrome: {
+                files: [
+                    'Gruntfile.js',
+                    'Rakefile',
+                    'config.rb',
+                    'crxmake.sh',
+                    'src/config/chrome/**/*',
+                    'src/ext/**/*',
+                    'src/img/**/*',
+                    'src/lib/**/*',
+                    'src/templates/**/*'
+                ],
+                tasks: ['shell:chrome_assemble']
+            },
+            firefox: {
+                files: [
+                    'Gruntfile.js',
+                    'Rakefile',
+                    'config.rb',
+                    'src/config/firefox/**/*',
+                    'src/ext/**/*',
+                    'src/img/**/*',
+                    'src/lib/**/*',
+                    'src/templates/**/*'
+                ],
+                tasks: ['shell:firefox_build']
+            },
+            safari: {
+                files: [
+                    'Gruntfile.js',
+                    'Rakefile',
+                    'config.rb',
+                    'src/config/safari/**/*',
+                    'src/dev/runInPageContext.js',
+                    'src/ext/**/*',
+                    'src/img/**/*',
+                    'src/lib/**/*',
+                    'src/templates/**/*'
+                ],
+                tasks: ['shell:safari_build']
             }
         }
 
@@ -95,6 +148,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-jslint');
+    grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-wrap');
 
     grunt.registerTask('templates', ['jst:compile', 'wrap:templates']);

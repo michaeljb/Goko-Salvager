@@ -88,12 +88,10 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.loadNpmTasks('grunt-contrib-jscs');
     grunt.loadNpmTasks('grunt-contrib-jst');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-wrap');
 
-    grunt.registerTask('lint', ['jscs:all', 'jslint:all']);
     grunt.registerTask('templates', ['jst:compile', 'wrap:templates']);
 };

@@ -139,6 +139,25 @@ module.exports = function (grunt) {
                     'src/templates/**/*'
                 ],
                 tasks: ['shell:safari_build']
+            },
+            browsers: {
+                files: [
+                    'Gruntfile.js',
+                    'Rakefile',
+                    'config.rb',
+                    'crxmake.sh',
+                    'src/config/**/*',
+                    'src/dev/runInPageContext.js',
+                    'src/ext/**/*',
+                    'src/img/**/*',
+                    'src/lib/**/*',
+                    'src/templates/**/*'
+                ],
+                tasks: [
+                    'shell:chrome_assemble',
+                    'shell:firefox_build',
+                    'shell:safari_build'
+                ]
             }
         }
 

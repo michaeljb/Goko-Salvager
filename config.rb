@@ -98,6 +98,7 @@
         'quickGame.js',
         'launchScreenLoader.js',
         'connection.js',
+        'betterEndTurn.js',
         'autozap.js',
         'module_loader.js'
     ]

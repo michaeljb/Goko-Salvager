@@ -31,6 +31,7 @@
         'vptoggle',             // Depends on sidebar
         'vpcounterui',          // Depends on sidebar
         'chatbox',              // Depends on sidebar
+        'betterEndTurn',
         'autozap'
     ];
 

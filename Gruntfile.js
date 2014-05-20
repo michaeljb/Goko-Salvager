@@ -74,7 +74,7 @@ module.exports = function (grunt) {
 
         shell: {
             chrome_assemble: {
-                command: 'rake chrome:assemble'
+                command: 'rake chrome:assemble["https://www.gokosalvager.com/update_chrome.xml","Goko Dominion Salvager (development version)"]'
             },
             firefox_build: {
                 command: 'rake firefox:build'

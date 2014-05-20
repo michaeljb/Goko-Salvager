@@ -31,11 +31,10 @@
             GS.AM.wsMaxFails = 100;
 
             // Use secure websockets
-            // TODO: switch from 8889 back to 443 port after transition
             if (GS.get_option('testmode')) {
-                GS.AM.server_url = 'wss://gokosalvager.com:7889/automatch';
+                GS.AM.server_url = 'wss://gokosalvager.com:7443/automatch';
             } else {
-                GS.AM.server_url = 'wss://gokosalvager.com:8889/automatch';
+                GS.AM.server_url = 'wss://gokosalvager.com:443/automatch';
             }
 
             // Initial state

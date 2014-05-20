@@ -38,8 +38,7 @@
                 callback(img);
             };
             img.crossOrigin = "Anonymous";
-            // TODO: Switch from port 8889 back to 443 after server transition
-            img.src = "https://gokosalvager.com:8889/"
+            img.src = "https://gokosalvager.com:443/"
                     + "gs/avatars/" + userdata.player.id + ".jpg";
         };
 

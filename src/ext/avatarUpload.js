@@ -61,7 +61,7 @@
         $('#auButton').on("click", function () {
             $('#auPID').val(mtgRoom.conn.connInfo.playerId);
             $.ajax({
-                url: 'https://www.gokosalvager.com:8889/gs/submit_avatar',
+                url: 'https://www.gokosalvager.com:443/gs/submit_avatar',
                 type: 'POST',
                 xhr: function () { return $.ajaxSettings.xhr(); },
                 beforeSend: null,

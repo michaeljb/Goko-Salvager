@@ -25,7 +25,7 @@ module.exports = function (grunt) {
                     es5: true,
                     forin: true,
                     indent: 4,
-                    maxlen: 116,
+                    maxlen: 160,
                     node: true,
                     nomen: true,
                     regexp: true,

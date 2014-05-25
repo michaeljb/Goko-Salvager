@@ -8,49 +8,31 @@
         '#desktopnotificationcheckbox'
     ];
     GS.modules.notifications.load = function () {
+        var Notification = window.Notification || window.mozNotification
+                                               || window.webkitNotification;
+
         var openNotifications = [];
 
         var requestNotificationPermission = function () {
-            switch (GS.getBrowser()) {
-            case 'Firefox':
-                Notification.requestPermission();
-                break;
-            case 'Chrome':
-                window.webkitNotifications.requestPermission();
-                break;
-            case 'Safari':
-                GS.set_option('desktop_notifications', false);
-                $('#settingsDialog').scope().$digest();
-                alert('Sorry. Safari does not support HTML5 desktop notifications yet.');
-                break;
-            default:
-                throw 'Unknown browser ' + GS.getBrowser();
-            }
+            Notification.requestPermission(function (p) {
+                console.log('Notification permission: ' + p);
+            });
         };
 
         var ALLOWED = 0;
         var NOT_SET = 1;
         var BLOCKED = 2;
         var getNotificationPermission = function () {
-            switch (GS.getBrowser()) {
-            case 'Firefox':
-                switch (Notification.permission) {
-                case 'granted':
-                    return 0;
-                case 'default':
-                    return 1;
-                case 'denied':
-                    return 2;
-                default:
-                    throw 'Impossible Firefox Notification.permission value: '
-                        + Notification.permission;
-                }
-            case 'Chrome':
-                return window.webkitNotifications.checkPermission();
-            case 'Safari':
+            switch (Notification.permission) {
+            case 'granted':
+                return 0;
+            case 'default':
                 return 1;
+            case 'denied':
+                return 2;
             default:
-                throw 'Unknown browser ' + GS.getBrowser();
+                throw 'Impossible Notification.permission value: '
+                    + Notification.permission;
             }
         };
 
@@ -99,23 +81,8 @@
         });
 
         var createDesktopNotification = function (message) {
-            var n;
-            switch (GS.getBrowser()) {
-            case 'Firefox':
-                n = new Notification(message, {icon: GS.salvagerIconURL});
-                openNotifications.push(n);
-                break;
-            case 'Chrome':
-                n = window.webkitNotifications.createNotification(GS.salvagerIconURL,
-                        'Goko Salvager', message);
-                n.show();
-                openNotifications.push(n);
-                break;
-            case 'Safari':
-                throw 'Impossible to reach this code.';
-            default:
-                throw 'Unknown browser ' + GS.getBrowser();
-            }
+            var n = new Notification(message, {icon: GS.salvagerIconURL});
+            openNotifications.push(n);
         };
 
         // Close notifications whenever user clicks anywhere

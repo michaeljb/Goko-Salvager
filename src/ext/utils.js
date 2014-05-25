@@ -106,7 +106,7 @@
         return out;
     };
 
-    GS.salvagerIconURL = 'http://gokologs.drunkensailor.org/static/img/salvager128.png';
+    GS.salvagerIconURL = 'https://www.gokosalvager.com/static/img/salvager128.png';
     GS.url = 'www.gokosalvager.com';
 
     // Parse numbers like 303 and 4.23k

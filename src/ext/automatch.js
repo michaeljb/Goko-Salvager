@@ -600,8 +600,74 @@
             GS.AM.ping = function () {
                 GS.AM.ws.sendMessage('PING', {});
             };
+            
+            var requirementsFromSettings = function () {
+                var np, ns, rr, rs, vp;
+
+                np = {rclass: 'NumPlayers', props: {}};
+                np.props.min_players = parseInt(GS.get_option('automatch_min_players'), 10);
+                np.props.max_players = parseInt(GS.get_option('automatch_max_players'), 10);
+
+                ns = {rclass: 'NumSets', props: {}};
+                ns.props.min_sets = parseInt(GS.get_option('automatch_min_sets'), 10);
+                ns.props.max_sets = parseInt(GS.get_option('automatch_max_sets'), 10);
+
+                rr = {rclass: 'RelativeRating', props: {}};
+                var rdiff = parseInt(GS.get_option('automatch_rdiff'), 10);
+                var rsystem = GS.get_option('automatch_rSystem');
+                rr.props.pts_lower = rdiff;
+                rr.props.pts_higher = rdiff;
+                rr.props.rating_system = rsystem;
+
+                rs = {rclass: 'RatingSystem', props: {}};
+                rs.props.rating_system = rsystem;
+
+                vp = {rclass: 'VPCounter', props: {}};
+                switch (GS.get_option('automatch_vpcounter')) {
+                case 'null':
+                    vp.props.vpcounter = null;
+                    break;
+                case 'true':
+                    vp.props.vpcounter = true;
+                    break;
+                case 'false':
+                    vp.props.vpcounter = false;
+                    break;
+                }
+                
+                return [np, ns, rr, rs, vp];
+            };
+
+            var keyForReq = function (req) {
+                // Can have multiple rating reqs, key on rating type as well as req class
+                if (req.rclass === 'RelativeRating' || req.rclass === 'AbsoluteRating') {
+                   return req.rclass + req.props.rating_system;
+                }
+                return req.rclass;
+            }
 
             GS.AM.submitSeek = function (seek) {
+
+                GS.debug('requested seek');
+
+                // Add reqs from settings to any already in seek.
+                // If seek already has a req of a class, let it
+                // override the req from settings.
+                var settingsReqs = requirementsFromSettings();
+                var effectiveReqs = [];
+                for (var i = 0; i < settingsReqs.length; i++) {
+                    effectiveReqs[keyForReq(settingsReqs[i])] = settingsReqs[i];
+                }
+                for (var i = 0; i < seek.requirements.length; i++) {
+                    effectiveReqs[keyForReq(seek.requirements[i])] = seek.requirements[i];
+                }
+                seek.requirements = [];
+                for (var rclass in effectiveReqs) {
+                    if (effectiveReqs.hasOwnProperty(rclass)) {
+                        seek.requirements.push(effectiveReqs[rclass]);
+                    }
+                }
+
                 var blist = GS.getCombinedBlacklist();
                 seek.blacklist = [];
                 _.keys(blist).map(function (pname) {

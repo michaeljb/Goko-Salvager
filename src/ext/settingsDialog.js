@@ -26,9 +26,11 @@
                     .append($('<ul>')
                         .append($('<li><a href="#settingsTabs-lobby">Lobby</a></li>'))
                         .append($('<li><a href="#settingsTabs-game">Game</a></li>'))
+                        .append($('<li><a href="#settingsTabs-automatch">Automatch</a></li>'))
                         .append($('<li><a href="#settingsTabs-black">Blacklist</a></li>'))
                         .append($('<li><a href="#settingsTabs-misc">Misc</a></li>')))
                     .append($('<div id="settingsTabs-game">'))
+                    .append($('<div id="settingsTabs-automatch">'))
                     .append($('<div id="settingsTabs-black">'))
                     .append($('<div id="settingsTabs-lobby">'))
                     .append($('<div id="settingsTabs-misc">'))));
@@ -86,6 +88,148 @@
             .append($('<input>').attr('type', 'text')
                                 .attr('id', 'greeting')
                                 .attr('ng-model', 'so.greeting'));
+
+        // Define the dialog sections: automatch settings
+        $('#settingsTabs-automatch').append([
+                '<div id="seekPop" title="Request Automatch" ng:app ',
+                '     ng:controller="settingsController">',
+                '  <table>',
+                '    <tr>',
+                '      <td colspan="2">',
+                '        <label>Min Players:</label>',
+                '        <select id="minPlayers" ng:model="so.automatch_min_players">',
+                '          <option value="2">2</option>',
+                '          <option value="3">3</option>',
+                '          <option value="4">4</option>',
+                '          <option value="5">5</option>',
+                '          <option value="6">6</option>',
+                '        </select>',
+                '      </td>',
+                '      <td colspan="2">',
+                '        <label>Min Sets:</label>',
+                '        <select id="minSets" ng:model="so.automatch_min_sets">',
+                '          <option selected value="1">Base Only</option>',
+                '          <option value="2">2</option>',
+                '          <option value="3">3</option>',
+                '          <option value="4">4</option>',
+                '          <option value="5">5</option>',
+                '          <option value="6">6</option>',
+                '          <option value="7">7</option>',
+                '          <option value="8">8</option>',
+                '          <option value="9">9</option>',
+                '          <option value="10">10</option>',
+                '          <option value="12">12</option>',
+                '          <option value="13">13</option>',
+                '          <option value="14">14</option>',
+                '          <option value="15">All Cards</option>',
+                '        </select>',
+                '      </td>',
+                '    </tr>',
+                '    <tr>',
+                '      <td colspan="2">',
+                '        <label>Max Players:</label>',
+                '        <select id="maxPlayers" ng:model="so.automatch_max_players">',
+                '          <option value="2">2</option>',
+                '          <option value="3">3</option>',
+                '          <option value="4">4</option>',
+                '          <option value="5">5</option>',
+                '          <option value="6">6</option>',
+                '        </select>',
+                '      </td>',
+                '      <td colspan="2">',
+                '        <label>Max Sets:</label>',
+                '        <select id="maxSets" ng:model="so.automatch_max_sets">',
+                '          <option value="1">Base Only</option>',
+                '          <option value="2">2</option>',
+                '          <option value="3">3</option>',
+                '          <option value="4">4</option>',
+                '          <option value="5">5</option>',
+                '          <option value="6">6</option>',
+                '          <option value="7">7</option>',
+                '          <option value="8">8</option>',
+                '          <option value="9">9</option>',
+                '          <option value="10">10</option>',
+                '          <option value="12">12</option>',
+                '          <option value="13">13</option>',
+                '          <option value="14">14</option>',
+                '          <option selected value="15">All Cards</option>',
+                '        </select>',
+                '      </td>',
+                '    </tr>',
+                '  </table>',
+                '  <table>',
+                '    <tr>',
+                '      <td colspan="1">',
+                '        <label>Rating +/-</label>',
+                '      </td>',
+                '      <td colspan="1">',
+                '        <input type="number" id="rdiff" value="2000" size="4"',
+                '               ng:model="so.automatch_rdiff"/>',
+                '      </td>',
+                '    </tr>',
+                '    <tr>',
+                '      <td colspan="1">',
+                '        <label>System</label>',
+                '      </td>',
+                '      <td colspan="1">',
+                '        <select id="ratingSystem" ng:model="so.automatch_rSystem">',
+                '          <option value="pro">Pro</option>',
+                '          <option value="casual">Casual</option>',
+                '          <option value="unrated">Unrated</option>',
+                '        </select>',
+                '      </td>',
+                '    </tr>',
+                '    <tr>',
+                '      <td colspan="1">',
+                '        <label>VP Counter</label>',
+                '      </td>',
+                '      <td colspan="1">',
+                '        <select id="vpCounterSeek" ng:model="so.automatch_vpcounter">',
+                '          <option value="null">Any</option>',
+                '          <option value="true">On</option>',
+                '          <option value="false">Off</option>',
+                '        </select>',
+                '      </td>',
+                '    </tr>',
+                '  </table>',
+                '</div>'
+            ].join(''));
+
+            // Override Goko's "hide select elements by default" css
+            $('#seekPop select').css('visibility', 'inherit');
+            $('#seekPop select').css('top', 'auto');
+
+            /*
+             * Input validation
+             */
+
+            $('#minPlayers').change(function () {
+                if (parseInt($('#minPlayers').val(), 10)
+                        > parseInt($('#maxPlayers').val(), 10)) {
+                    $('#maxPlayers').val($('#minPlayers').val());
+                }
+            });
+
+            $('#maxPlayers').change(function () {
+                if (parseInt($('#maxPlayers').val(), 10)
+                        < parseInt($('#minPlayers').val(), 10)) {
+                    $('#minPlayers').val($('#maxPlayers').val());
+                }
+            });
+
+            $('#minSets').change(function () {
+                if (parseInt($('#minSets').val(), 10)
+                        > parseInt($('#maxSets').val(), 10)) {
+                    $('#maxSets').val($('#minSets').val());
+                }
+            });
+
+            $('#maxSets').change(function () {
+                if (parseInt($('#maxSets').val(), 10)
+                        < parseInt($('#minSets').val(), 10)) {
+                    $('#minSets').val($('#maxSets').val());
+                }
+            });
 
         // Define the dialog sections: blacklist settings
         $('#settingsTabs-black')

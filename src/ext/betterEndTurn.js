@@ -15,8 +15,11 @@
             if (GS.get_option('better_end_turn')) {
                 gameClient.clientConnection.bind('uiMultiSelect', hideEndTurnView, gameClient.playerController);
 
-                $('#sidebar').prepend(GS.template('better-end-turn'));
                 betterEndTurnButton = document.getElementById('better-end-turn');
+                if (betterEndTurnButton === null) {
+                    $('#sidebar').prepend(GS.template('better-end-turn'));
+                    betterEndTurnButton = document.getElementById('better-end-turn');
+                }
                 betterEndTurnButton.onclick = endTurn;
             } else if (betterEndTurnButton !== null) {
                 // if a game was started with the option turned on, then the

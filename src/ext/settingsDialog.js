@@ -53,6 +53,8 @@
             .append('<label for="settings_flash_chat">Visual chat alert</label><br />')
             .append($('<input type="checkbox" ng-model="so.chat_noise" id="settings_chat_noise" class="indented">'))
             .append('<label for="settings_chat_noise">Audio chat alert</label><br />')
+            .append($('<input type="checkbox" ng-model="so.better_end_turn" id="settings_better_end_turn" class="indented">'))
+            .append('<label for="settings_better_end_turn">Better "End Turn" button</label><br />')
             .append($('<div>').text('VP Counter'))
             .append($('<input>').attr('type', 'checkbox')
                                 .attr('id', 'settings_vp_request')
@@ -390,9 +392,13 @@
             });
             $scope.$watch('so.sidebar', function () {
                 $scope.so.sidebar_chat = $scope.so.sidebar_chat && $scope.so.sidebar;
+                $scope.so.better_end_turn = $scope.so.better_end_turn && $scope.so.sidebar;
             });
             $scope.$watch('so.sidebar_chat', function () {
                 $scope.so.sidebar = $scope.so.sidebar_chat || $scope.so.sidebar;
+            });
+            $scope.$watch('so.better_end_turn', function () {
+                $scope.so.sidebar = $scope.so.better_end_turn || $scope.so.sidebar;
             });
             $scope.$watch('so.vp_request', function () {
                 $scope.so.vp_refuse = $scope.so.vp_refuse && !$scope.so.vp_request;

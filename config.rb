@@ -90,6 +90,7 @@
         'lobby_ratings.js',
         'speedTweak.js',
         'alwaysStack.js',
+        'handSorter.js',
         'decktracker.js',
         'automatchGamePop.js',
         'automatchOfferPop.js',

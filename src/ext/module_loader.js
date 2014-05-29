@@ -20,6 +20,7 @@
         'kingdomGenerator',
         'speedTweak',
         'alwaysStack',
+        'handSorter',
         'automatchGamePop',
         'automatchOfferPop',
         'automatchSeekPop',

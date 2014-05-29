@@ -267,13 +267,11 @@ h1.turnheader {
 }
 
 #alt-end-turn {
-  float: right;
   color: red;
   font-weight: bold;
 }
 
 #alt-end-actions {
-  float: right;
   color: blue;
   font-weight: bold;
 }

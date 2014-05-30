@@ -266,8 +266,12 @@ h1.turnheader {
   background-color:rgb(0,0,0);
 }
 
-#better-end-turn {
-  float: right;
+#alt-end-turn {
   color: red;
+  font-weight: bold;
+}
+
+#alt-end-actions {
+  color: blue;
   font-weight: bold;
 }

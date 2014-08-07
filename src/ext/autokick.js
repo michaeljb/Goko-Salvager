@@ -52,6 +52,7 @@
                 // Blacklist no-play kick criteria
                 var blCrit = new BlacklistKickCriterion(GS.getCombinedBlacklist(),
                                                         opp.get('playerName'));
+                blCrit.apply = true;
 
                 // Don't kick or notify when in Adventure/Play Bots modes
                 // or when the user adds a bot to his own game

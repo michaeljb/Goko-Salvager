@@ -204,6 +204,7 @@ kinggen_utils = (function () {
             walledvillage: "X4",
             governor: "X5",
             stash: "X5",
+            prince: "X8",
             candlestickmaker: "G2",
             stonemason: "G2",
             doctor: "G3",

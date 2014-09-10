@@ -1,0 +1,29 @@
+<div class="db-popup" style="top:40%;">
+  <div class="content" style="position:absolute; min-height: 100px;max-height:200px; top: 40%;left:15%; width: 70%;">
+    <div style="text-align:center;height:120px;margin:10px;">
+      <div style="margin-top:10px">
+        Select a kingdom (see <a target="_blank" href="http://dom.retrobox.eu/kingdomgenerator.html">instructions</a>):
+      </div>
+      <form id="selform" onsubmit="GS.kG.KingdomselCode.returnCards(event);">
+        <% if (hasNewUi) { %>
+          #'s:
+          Base: <input type="number" style="width:8px" id="king_gensel0" min="0" max="10">
+          Int: <input type="number" style="width:8px" id="king_gensel1" min="0" max="10">
+          Sea: <input type="number" style="width:8px" id="king_gensel2" min="0" max="10">
+          Alch: <input type="number" style="width:8px" id="king_gensel3" min="0" max="10">
+          Prosp: <input type="number" style="width:8px" id="king_gensel4" min="0" max="10">
+          Corn: <input type="number" style="width:8px" id="king_gensel5" min="0" max="10">
+          Hint: <input type="number" style="width:8px" id="king_gensel6" min="0" max="10">
+          DA: <input type="number" style="width:8px" id="king_gensel7" min="0" max="10">
+          Guilds: <input type="number" style="width:8px" id="king_gensel8" min="0" max="10">
+          Promos: <input type="number" style="width:8px" id="king_gensel9" min="0" max="10">
+        <% } %>
+        <br />
+        Cards: <input id="selval" name="selval" style="width:90%" value="<%= defaultval %>">
+        <br />
+        <input type="submit" name="kingselGo" class="fs-launch-game-btn" style="margin:5px;" value="OK">
+        <input type="button" name="kingselCancel" class="fs-launch-game-btn" style="margin:5px;" value="Cancel (default settings)" onClick="GS.kG.KingdomselCode.cancelCards();">
+      </form>
+    </div>
+  </div>
+</div>

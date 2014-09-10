@@ -634,58 +634,15 @@ kinggen_utils.KingdomselDisplay = (function() {
 	pubvars.cssclass = "newlog db-popup-container";
 	pubvars.htmlstyle = "position:absolute;display:none;left:0px;top:0px;height:100%;width:100%;background:rgba(0,0,0,0.5);z-index:6000;";
 	pubvars.innerHTML = function(defaultval) {
-		var output = '<div class="db-popup" style="top:40%;"><div class="content" style="position:absolute; min-height: 100px;max-height:200px; top: 40%;left:15%; width: 70%;">\
-						<div style="text-align:center;height:120px;margin:10px;">\
-						<div style="margin-top:10px">Select a kingdom (see <a target="_blank" href="http://dom.retrobox.eu/kingdomgenerator.html">instructions</a>):</div>\
-						<form id="selform" onsubmit="GS.kG.KingdomselCode.returnCards(event);">';
-		if (hasNewUi) {
-			output += '#\'s:';
-			for (var i = 0;i<10;i++) {
-				switch(i) {
-				case 0:
-					output += ' Base:';
-					break;
-				case 1:
-					output += ' Int:';
-					break;
-				case 2:
-					output += ' Sea:';
-					break;
-				case 3:
-					output += ' Alch:';
-					break;
-				case 4:
-					output += ' Prosp:';
-					break;
-				case 5:
-					output += ' Corn:';
-					break;
-				case 6:
-					output += ' Hint:';
-					break;
-				case 7:
-					output += ' DA:';
-					break;
-				case 8:
-					output += ' Guilds:';
-					break;
-				case 9:
-					output += ' Promos:';
-					break;
-				}
-				output += '<input type="number" style="width:8px" id="king_gensel' + i + '" min="0" max="10">';
-			}
-		}
-		output += '<br />Cards: <input id="selval" name="selval" style="width:90%" value="' + defaultval + '"><br />\
-		<input type="submit" name="kingselGo" class="fs-launch-game-btn" style="margin:5px;" value="OK">\
-		<input type="button" name="kingselCancel" class="fs-launch-game-btn" style="margin:5px;" value="Cancel (default settings)" onClick="GS.kG.KingdomselCode.cancelCards();">\
-		</form></div></div></div>';
-		return output;
+		return GS.template('kingdom-generator', {
+      hasNewUi: hasNewUi,
+      defaultval: defaultval
+    });
 	};
-
 
 	return pubvars;
 }());
+
 //code section of form
 kinggen_utils.KingdomselCode = (function() {
 	"use strict";

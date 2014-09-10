@@ -146,6 +146,9 @@
 
     // load templates from the generated templates.js
     GS.template = function (templateName, options) {
+        GS.debug('Rendering template "' + templateName + '", with options ' +
+                 JSON.stringify(options)
+                );
         try {
             return window.JST[templateName](options);
         } catch (e) {

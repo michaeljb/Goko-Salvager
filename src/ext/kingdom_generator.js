@@ -709,7 +709,64 @@ kinggen_utils.KingdomselCode = (function() {
 		var all = {};
 		kinggen_utils.myCachedCards.each(function (c) {all[c.get('nameId').toLowerCase()] = c.toJSON(); });
 		savedfunct(kinggen_utils.myBuildDeck(all, kinggen_utils.set_parser.parse('All')));
-	}
+	};
+
+  pubfuncts.generateWeightedCards = function (event) {
+    var more, less, never, normal, weighted;
+    var moreStr, lessStr, neverStr;
+
+    var rSeperator = /\s*[,+]+\s*/;
+
+    var getListFromTargetIndex = function (i) {
+      var inputVal = event.target[i].value;
+
+      if (inputVal === '') {
+        return [];
+      } else {
+        return inputVal.split(rSeperator);
+      }
+    };
+
+    more = getListFromTargetIndex(0);
+    less = getListFromTargetIndex(1);
+    never = getListFromTargetIndex(2);
+
+    var normalArr = ['ALL'];
+    var weightedArr = [];
+
+    if (more.length > 0) {
+      moreStr = '(' + more.join(' + ') + ')';
+      normalArr.push(moreStr);
+      weightedArr.push('9*' + moreStr);
+    }
+
+    if (less.length > 0) {
+      lessStr = '(' + less.join(' + ') + ')';
+      normalArr.push(lessStr);
+      weightedArr.push('1*' + lessStr);
+    }
+
+    if (never.length > 0) {
+      neverStr = '(' + never.join(' + ') + ')';
+      normalArr.push(neverStr);
+    }
+
+    normal = '(' + normalArr.join(' / ') + ')';
+    weightedArr.push('3*' + normal);
+
+    weighted = '10 (' + weightedArr.join(' + ') + ')';
+
+    if (more.length === 0 && less.length === 0 && never.length === 0) {
+      weighted = 'All';
+    }
+
+    selval.value = weighted;
+
+    // don't let the form submission reload the page
+    event.stopPropagation();
+    event.preventDefault();
+	};
+
 
 	return pubfuncts;
 }());

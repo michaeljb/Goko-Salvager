@@ -1,6 +1,6 @@
 <div class="db-popup" style="top:40%;">
-  <div class="content" style="position:absolute; min-height: 100px;max-height:200px; top: 40%;left:15%; width: 70%;">
-    <div style="text-align:center;height:120px;margin:10px;">
+  <div class="content" style="position:absolute; min-height: 100px;max-height:270px; top: 40%;left:15%; width: 70%;">
+    <div style="text-align:center;height:270px;margin:10px;">
       <div style="margin-top:10px">
         Select a kingdom (see <a target="_blank" href="http://dom.retrobox.eu/kingdomgenerator.html">instructions</a>):
       </div>
@@ -23,6 +23,14 @@
         <br />
         <input type="submit" name="kingselGo" class="fs-launch-game-btn" style="margin:5px;" value="OK">
         <input type="button" name="kingselCancel" class="fs-launch-game-btn" style="margin:5px;" value="Cancel (default settings)" onClick="GS.kG.KingdomselCode.cancelCards();">
+      </form>
+
+      Advanced Generator (see <a target="_blank" href="http://forum.dominionstrategy.com/index.php?topic=11749.0">Instructions</a>):
+      <form id="weighted-generator" onsubmit="GS.kG.KingdomselCode.generateWeightedCards(event)">
+        More Likely (300%): <input id="weighted-more"><br />
+        Less Likely (33%): <input id="weighted-less"><br />
+        Exclude: <input id="weighted-exclude"><br />
+        <input type="submit" name="weightedGo" class="fs-launch-game-btn" style="margin:5px;" value="Generate String"/>
       </form>
     </div>
   </div>

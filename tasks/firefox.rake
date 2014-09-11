@@ -61,7 +61,7 @@ namespace :firefox do
         server = 'https://%s' % [props[:hostServer]]
         if args[:forbetas] == 'true' then
             file = 'update_firefox_forbetas.rdf'
-            title = "%s (beta tester version)" % props[:title]
+            title = "%s" % props[:title]
         else
             file = 'update_firefox.rdf'
             title = "%s" % props[:title]

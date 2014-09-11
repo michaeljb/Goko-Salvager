@@ -12,7 +12,7 @@ namespace :chrome do
         server = 'https://%s' % [props[:hostServer]]
         if args[:forbetas] == 'true' then
             file = 'update_chrome_forbetas.xml'
-            title = "%s (beta tester version)" % props[:title]
+            title = "%s" % props[:title]
         else
             file = 'update_chrome.xml'
             title = "%s" % props[:title]

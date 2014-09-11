@@ -92,7 +92,7 @@ namespace :safari do
         if args[:forbetas] == 'true' then
             upfile = 'update_safari_forbetas.plist'
             sofile = 'v%s/forbetas/gokosalvager.safariextz' % [props[:version]]
-            title = "%s (beta tester version)" % props[:title]
+            title = "%s" % props[:title]
         else
             upfile = 'update_safari.plist'
             sofile = 'v%s/gokosalvager.safariextz' % [props[:version]]

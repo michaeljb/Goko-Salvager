@@ -9,6 +9,8 @@ these instructions, and then run `rake safari:build`.
 When your Safari Developer Certificate expires, you will need to follow these
 instructions again to get the proper files into your `~/.private/safari`.
 
+# Building Safari Extensions from the command line
+
 1. Install latest version of Safari
 
 2. Download a patched version of the
@@ -69,3 +71,20 @@ instructions again to get the proper files into your `~/.private/safari`.
     `build/safari/gokosalvager.safariextension/` to see exactly how the source
     is translated into files Safari can use, and double-click on
     `build/gokosalvager.safariextz` from the Finder to add it to Safari.
+
+# Updating your Safari Developer Certificate
+
+1. Log on to the Apple Developer Center, and go to the
+   [Account page](https://developer.apple.com/account/overview.action).
+
+2. Click on "Certificates" under "Safari Extensions".
+
+3. Click `+` to create a new Certificate Signing Request.
+
+4. Follow the instructions to create a `.certSigningRequest` file with the Keychain
+   Access application, and click "Continue".
+
+5. Upload your generated `.certSigningRequest` file, then click "Generate".
+
+6. Downlaod the generated Certificate, then follow the steps in the previous
+   section for generating the appropriate files in your `~/.private/safari`

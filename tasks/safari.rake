@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
-# Based on http://developer.streak.com/2013/01/how-to-build-safari-extension-using.html
-# Contains instructions on obtaining your Safari developer security files.
+# See Safari.md (at the root of the project) for instructions on obtaining your
+# Safari developer security files.
 def create_and_sign(src_dir, cert_dir, target)
 
     # Required Apple Safari developer security files:
